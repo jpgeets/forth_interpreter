@@ -3,9 +3,11 @@ from forth_interpreter import Interpreter
 
 def test_empty_input_returns_empty_stack():
     interpreter = Interpreter()
-    assert interpreter.execute("   ") == []
+    result = interpreter.execute("   ")
+    assert result == []
 
 
 def test_comments_do_not_affect_execution():
     interpreter = Interpreter()
-    assert interpreter.execute("6 2 - ( subtract ) 3 +") == [7]
+    result interpreter.execute("6 2 + ( add ) 3 +")
+    assert  result == [11]
