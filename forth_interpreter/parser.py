@@ -1,9 +1,7 @@
 """Token parsing helpers."""
 
 from __future__ import annotations
-
 from .errors import InvalidNumberError
-
 
 def strip_comments(code: str) -> str:
     """Remove simple parenthesized comments.
@@ -32,7 +30,12 @@ def tokenize(code: str) -> list[str]:
 
 
 def is_integer_token(token: str) -> bool:
-    """Return True if token represents an integer token."""
+    if not token:
+        return False
+
+    if token[0] in "+-":
+        return len(token) > 1 and token[1:].isdigit()
+
     return token.isdigit()
 
 
@@ -41,4 +44,4 @@ def parse_integer(token: str) -> int:
     if not is_integer_token(token):
         raise InvalidNumberError(f"Invalid integer token: {token}")
 
-    return token
+    return int(token)
